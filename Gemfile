@@ -14,4 +14,6 @@ gem 'rails-controller-testing'
 gem 'rubocop', require: false
 gem 'rubocop-rspec', require: false
 
+gem 'instagram', github: 'facebookarchive/instagram-ruby-gem', branch: 'master'
+
 gemspec

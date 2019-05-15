@@ -1,0 +1,26 @@
+<%= form_for resource, url: admin_instagram_settings_path do |f| %>
+  <div data-hook="admin_instagram_settings_fields">
+    <div class="row">
+      <div class="col-12 col-md-8">
+        <%= f.field_container :access_token, class: ['form-group'] do %>
+          <%= f.label :access_token, Spree.t(:access_token) %>
+          <%= f.text_field :access_token, class: 'form-control title', disabled: true %>
+          <%= f.error_message_on :access_token %>
+        <% end %>
+      </div>
+
+      <div class="col-12 col-md-8">
+        <%= f.field_container :target_account, class: ['form-group'] do %>
+          <%= f.label :target_account, raw(Spree.t(:target_account) + content_tag(:span, ' *', class: 'required')) %>
+          <%= f.text_field :target_account, class: 'form-control title' %>
+          <%= f.error_message_on :target_account %>
+        <% end %>
+      </div>
+      
+    </div>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'save' %>
+    </div>
+  </div>
+<% end %>
