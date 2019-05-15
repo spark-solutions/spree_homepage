@@ -1,7 +1,12 @@
 class Spree::HomePageField < ApplicationRecord
+  FILEDS = %i[
+    text
+    image
+  ].freeze
+
   belongs_to :home_page_section
 
-  validates_presence_of :title
+  validates_presence_of :title, :field_type
   validates_uniqueness_of :title, :name
 
   before_create :assign_name

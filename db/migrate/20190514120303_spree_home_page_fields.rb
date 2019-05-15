@@ -4,8 +4,8 @@ class SpreeHomePageFields < ActiveRecord::Migration[5.2]
       t.string :title, null: false, default: ''
       t.string :description, null: false, default: ''
       t.string :name, null: false, default: ''
-      t.string :filed_type, null: false, default: ''
-      t.references :spree_home_page_section, null: false
+      t.string :field_type, null: false, default: ''
+      t.references :home_page_section, null: false
 
       t.timestamps
     end

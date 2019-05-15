@@ -1,7 +1,8 @@
 Spree::Core::Engine.add_routes do
   # Add your extension routes here
   namespace :admin do
-    resource :home_page_settings, only: %i[edit update]
+    resources :home_page_sections
+    resources :home_page_fields
     resource :instagram_settings, only: %i[edit update destroy]
     resources :instagram_posts, only: [:index] do
       collection do

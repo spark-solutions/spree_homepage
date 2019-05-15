@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:home_page_section), admin_home_page_sections_url %> /
+  <%= Spree.t(:new) %>
+<% end %>
+
+<%= form_for :home_page_section, url: collection_url do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <%= render partial: 'spree/admin/shared/new_resource_links' %>
+<% end %>
