@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:home_page_fields), admin_home_page_fields_url %> /
+  <%= @home_page_field.name %>
+<% end %>
+
+<%= form_for @home_page_field, url: object_url, method: :put do |f| %>
+  <div class="row">
+    <div class="col-12">
+      <%= render partial: 'form', locals: { f: f } %>
+      <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+    </div>
+  </div>
+<% end %>

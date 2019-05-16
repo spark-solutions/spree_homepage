@@ -3,7 +3,7 @@ module Spree
     class InstagramPostsController < Spree::Admin::BaseController
       include Spree::Backend::Callbacks
 
-      before_action :load_resource, only: [:index]
+      before_action :load_resource, only: %i[index download]
 
       def index; end
 

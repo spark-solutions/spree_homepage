@@ -8,21 +8,27 @@
 
 
 <% if @home_page_sections.any? %>
-  <table class="table">
+  <table class="table sortable" data-sortable-link="<%= update_positions_admin_home_page_sections_url %>">
     <thead>
       <tr>
+        <th></th>
         <th><%= Spree.t(:name) %></th>
         <th><%= Spree.t(:title) %></th>
         <th><%= Spree.t(:description) %></th>
+        <th><%= Spree.t(:visible) %></th>
         <th data-hook="admin_home_page_sections_index_header_actions" class="actions"></th>
       </tr>
     </thead>
     <tbody>
       <% @home_page_sections.each do |section| %>
         <tr id="<%= spree_dom_id section %>">
+          <td class="move-handle">
+            <span class="icon icon-sort handle"></span>
+          </td>
           <td><%= link_to section.name, edit_admin_home_page_section_path(section) %></td>
           <td><%= section.title %></td>
           <td><%= section.description %></td>
+          <td><%= section.visible %> (<%= Spree.t(:mobile) %>: <%= section.mobile_visible %>)</td>
           <td class="actions actions-2" data-hook="admin_home_page_sections_index_row_actions">
             <%= link_to_edit section, no_text: true if can?(:edit, section) %>
             <%= link_to_delete section, no_text: true if can?(:delete, section) %>
