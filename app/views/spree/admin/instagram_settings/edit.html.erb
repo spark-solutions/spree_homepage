@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:instagram_settings) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <% if @resource.code.present? %>
+    <%= button_link_to Spree.t(:disconnect), admin_instagram_settings_path, method: :delete, class: "btn-danger", icon: 'remove' %>
+  <% else %>
+    <%= button_link_to Spree.t(:connect), admin_instagram_callbacks_connect_path, class: "btn-success", icon: 'add' %>
+  <% end %>
+<% end %>
+
+<%= render 'form', resource: @resource if @resource.code.present? %>
