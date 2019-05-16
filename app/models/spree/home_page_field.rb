@@ -1,5 +1,5 @@
 class Spree::HomePageField < ApplicationRecord
-  FILEDS = %i[
+  FIELDS = %i[
     text
     image
   ].freeze

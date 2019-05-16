@@ -8,9 +8,10 @@
 
 
 <% if @home_page_sections.any? %>
-  <table class="table">
+  <table class="table sortable" data-sortable-link="<%= update_positions_admin_home_page_sections_url %>">
     <thead>
       <tr>
+        <th></th>
         <th><%= Spree.t(:name) %></th>
         <th><%= Spree.t(:title) %></th>
         <th><%= Spree.t(:description) %></th>
@@ -21,6 +22,9 @@
     <tbody>
       <% @home_page_sections.each do |section| %>
         <tr id="<%= spree_dom_id section %>">
+          <td class="move-handle">
+            <span class="icon icon-sort handle"></span>
+          </td>
           <td><%= link_to section.name, edit_admin_home_page_section_path(section) %></td>
           <td><%= section.title %></td>
           <td><%= section.description %></td>
