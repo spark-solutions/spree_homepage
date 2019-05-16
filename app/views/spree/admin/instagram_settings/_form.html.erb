@@ -1,7 +1,7 @@
 <%= form_for resource, url: admin_instagram_settings_path do |f| %>
   <div data-hook="admin_instagram_settings_fields">
     <div class="row">
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-6">
         <%= f.field_container :access_token, class: ['form-group'] do %>
           <%= f.label :access_token, Spree.t(:access_token) %>
           <%= f.text_field :access_token, class: 'form-control title', disabled: true %>
@@ -9,7 +9,7 @@
         <% end %>
       </div>
 
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-6">
         <%= f.field_container :target_account, class: ['form-group'] do %>
           <%= f.label :target_account, raw(Spree.t(:target_account) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :target_account, class: 'form-control title' %>
