@@ -12,5 +12,15 @@
       <%= f.label :description %>
       <%= f.text_field :description, class: 'form-control' %>
     <% end %>
+
+    <%= f.field_container :visible, class: ['form-group'] do %>
+      <%= f.label :visible %>
+      <%= f.check_box :visible, class: 'form-control' %>
+    <% end %>
+    <%= f.field_container :mobile_visible, class: ['form-group'] do %>
+      <%= f.label :mobile_visible %>
+      <%= f.check_box :mobile_visible, class: 'form-control' %>
+    <% end %>
+
   </div>
 </div>
