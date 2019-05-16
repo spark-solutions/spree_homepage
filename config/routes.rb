@@ -23,8 +23,8 @@ Spree::Core::Engine.add_routes do
     namespace :v2 do
       namespace :storefront do
         get '/instagram_feed', to: 'instagram#feed'
+        resources :instagram_posts, only: %i[index]
         resources :home_page_sections, only: %i[index]
-        get '/home', to: 'instagram#feed'
       end
     end
   end
