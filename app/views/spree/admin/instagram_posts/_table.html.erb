@@ -1,0 +1,32 @@
+<%= form_for :spree_instagram_post, :url => update_visibility_admin_instagram_posts_path, :html => { :method => :post } do %>
+  <div class="row">
+    <div class="col-12 text-right">
+      <%= button Spree.t(:update_visibility), 'save' %>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Spree.t(:id) %></th>
+        <th><%= Spree.t(:thumbnail) %></th>
+        <th><%= Spree.t(:downloaded_at) %></th>
+        <th><%= Spree.t(:visible) %></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% instagram_posts.each do |post| %>
+      <%= fields_for "instagram_post[]", post do |post_fields| %>
+    <tr>
+      <td><%= post.id %></td>
+      <td><img src="<%= thumbnail_url(post) %>"></td>
+      <td><%= pretty_time post.created_at %></td>
+      <td>
+        <%= post_fields.label :show %>
+        <%= post_fields.check_box :show %>
+      </td>
+    </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
