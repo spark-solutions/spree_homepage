@@ -1,0 +1,39 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::HomePageField) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_section), new_object_url, class: "btn-success", icon: 'add' %>
+<% end if can?(:create, Spree::HomePageField) %>
+
+
+<% if @home_page_fields.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:title) %></th>
+        <th><%= Spree.t(:description) %></th>
+        <th data-hook="admin_home_page_fields_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @home_page_fields.each do |filed| %>
+        <tr id="<%= spree_dom_id section %>">
+          <td><%= link_to section.name, edit_home_page_field_path(filed) %></td>
+          <td><%= filed.title %></td>
+          <td><%= filed.description %></td>
+          <td class="actions actions-2" data-hook="admin_home_page_fields_index_row_actions">
+            <%= link_to_edit filed, no_text: true if can?(:edit, filed) %>
+            <%= link_to_delete filed, no_text: true if can?(:delete, filed) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageField)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url if can?(:create, Spree::HomePageField) %>!
+  </div>
+<% end %>
