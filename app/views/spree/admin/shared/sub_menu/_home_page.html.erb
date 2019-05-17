@@ -1,5 +1,6 @@
 <ul data-hook="admin_homepage_settings_sidebar_menu" class="border-top bg-white collapse nav nav-pills nav-stacked" id="sidebar-homepage">
   <%= configurations_sidebar_menu_item(Spree.t(:home_page_sections), spree.admin_home_page_sections_path) %>
   <%= configurations_sidebar_menu_item(Spree.t(:home_page_fields), spree.admin_home_page_fields_path) %>
-  <%= configurations_sidebar_menu_item(Spree.t(:instagram), spree.admin_instagram_settings_path) %>
+  <%= configurations_sidebar_menu_item(Spree.t(:instagram_settings), spree.edit_admin_instagram_settings_path) %>
+  <%= configurations_sidebar_menu_item(Spree.t(:instagram_posts), spree.admin_instagram_posts_path) %>
 </ul>
