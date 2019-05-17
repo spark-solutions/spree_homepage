@@ -14,6 +14,6 @@ class Spree::HomePageField < ApplicationRecord
   private
 
   def assign_name
-    self.name = title.tr!(' ', '_')
+    self.name = self.title.parameterize.underscore
   end
 end
