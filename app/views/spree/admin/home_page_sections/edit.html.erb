@@ -3,11 +3,36 @@
   <%= @home_page_section.name %>
 <% end %>
 
-<%= form_for @home_page_section, url: object_url, method: :put do |f| %>
-  <div class="row">
-    <div class="col-12">
-      <%= render partial: 'form', locals: { f: f } %>
-      <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title mb-0 h5">
+          <%= Spree.t(:edit_section) %> - <%= @home_page_section.name %>
+        </h1>
+      </div>
+      <div class="card-body">
+        <%= form_for @home_page_section, url: object_url, method: :put do |f| %>
+            <%= render partial: 'form', locals: { f: f } %>
+            <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+        <% end %>
+      </div>
     </div>
   </div>
-<% end %>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title mb-0 h5">
+          <%= Spree.t(:section_fields) %>
+        </h1>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled">
+          <% @home_page_section.home_page_fields.each do |field| %>
+            <li><%= link_to field.name, edit_admin_home_page_field_path(field) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
