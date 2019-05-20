@@ -12,7 +12,7 @@ module Spree
       end
 
       def resource_serializer
-        Spree::V2::Storefront::InstagramPostsSerializer
+        Spree::V2::Storefront::InstagramPostSerializer
       end
     end
   end
