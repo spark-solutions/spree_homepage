@@ -3,7 +3,7 @@ module Spree
     class HomePageFieldsController < ResourceController
       def create
         @home_page_field = Spree::HomePageField.new(home_page_field_params)
-        @home_page_field.build_image(attachment: params[:home_page_field][:image])
+        @home_page_field.build_image(attachment: image_params) if image_params
         if @home_page_field.save
           flash[:success] = Spree.t(:home_page_field_created)
           redirect_to acton: :index
@@ -15,7 +15,7 @@ module Spree
 
       def update
         @home_page_field = Spree::HomePageField.find(params[:id])
-        @home_page_field.create_image(attachment: params[:home_page_field][:image]) if params[:home_page_field][:image]
+        @home_page_field.create_image(attachment: image_params) if image_params
         if @home_page_field.update(home_page_field_params)
           flash[:success] = Spree.t(:success_updeate, resource: Spree.t(:home_page_field))
         else
@@ -25,6 +25,10 @@ module Spree
       end
 
       private
+
+      def image_params
+        params[:home_page_field][:image]
+      end
 
       def home_page_field_params
         params.require(:home_page_field).permit(:title, :content, :field_type, :home_page_section_id)
