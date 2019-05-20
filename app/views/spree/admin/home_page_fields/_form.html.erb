@@ -12,6 +12,13 @@
       <%= f.label :content %>
       <%= f.text_area :content, class: 'form-control' %>
     <% end %>
+
+    <%= f.field_container :image, class: ['form-group'] do %>
+      <%= f.label :image %>
+      <%= image_tag main_app.url_for(@home_page_field.image.try(:attachment)), class: "img-thumbnail" if @home_page_field.image %>
+      <%= f.file_field :image %>
+    <% end %>
+
   </div>
 </div>
 <div class="row">
