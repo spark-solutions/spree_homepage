@@ -14,6 +14,12 @@ module Spree
       def resource_serializer
         Spree::V2::Storefront::InstagramPostSerializer
       end
+
+      def serialize_resource(resource)
+        resource_serializer.new(
+          resource
+        ).serializable_hash
+      end
     end
   end
 end
