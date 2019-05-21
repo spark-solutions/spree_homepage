@@ -19,6 +19,15 @@ Introduction goes here.
   bundle exec rails g spree_homepage:install
   ```
 
+5. Open config/credentials.yml.enc by running `EDITOR="nano" bin/rails credentials:edit` (change `EDITOR` if necessary) inside Spree. Insert the following credentials:
+
+```
+instagram_client_id: <client_id_here>
+instagram_client_secret: <secret_here>
+```
+
+Running `bin/rails credentials:edit` will create an encrypted configuration file and place the key inside config/master.key (ignored by Git). In production, the key is provided using the `RAILS_MASTER_KEY` environment variable.
+
 4. Restart your server
 
   If your server was running, restart it so that it can find the assets properly.
