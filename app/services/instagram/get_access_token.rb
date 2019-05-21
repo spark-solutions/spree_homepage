@@ -8,14 +8,14 @@ module Instagram
     end
 
     def call
-      make_requst
+      make_request
       set_access_token
       set_code
     end
 
     private
 
-    def make_requst
+    def make_request
       @response = Instagram.get_access_token(code, redirect_uri: redirect_uri)
     end
 
