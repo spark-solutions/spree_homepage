@@ -7,13 +7,13 @@ module Instagram
     end
 
     def call
-      make_requst
+      make_request
       create_records
     end
 
     private
 
-    def make_requst
+    def make_request
       access_token = Spree::InstagramSetting.first.access_token
       client = Instagram.client(access_token: access_token)
       @feed = client.user_recent_media
