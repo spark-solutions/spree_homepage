@@ -4,7 +4,7 @@ class Spree::HomePageSection < ApplicationRecord
   validates_presence_of :title
   validates_uniqueness_of :title, :name
 
-  before_create :assign_name
+  before_save :assign_name
 
   private
 

@@ -5,11 +5,11 @@ module Spree
         @home_page_field = Spree::HomePageField.new(home_page_field_params)
         @home_page_field.build_image(attachment: image_params) if image_params
         if @home_page_field.save
-          flash[:success] = Spree.t(:home_page_field_created)
-          redirect_to acton: :index
+          flash[:success] = flash_message_for(@home_page_field, :successfully_created)
+          redirect_to action: :index
         else
-          flash[:error] = Spree.t(:home_page_field)
-          render :create
+          flash[:error] = Spree.t(:could_not_create_page_field)
+          render :new
         end
       end
 
@@ -17,9 +17,9 @@ module Spree
         @home_page_field = Spree::HomePageField.find(params[:id])
         @home_page_field.create_image(attachment: image_params) if image_params
         if @home_page_field.update(home_page_field_params)
-          flash[:success] = Spree.t(:success_updeate, resource: Spree.t(:home_page_field))
+          flash[:success] = flash_message_for(@home_page_field, :successfully_updated)
         else
-          flash[:error] = Spree.t(:failed_update, resource: Spree.t(:home_page_field))
+          flash[:error] = Spree.t(:could_not_update_page_field)
         end
         render :edit
       end
