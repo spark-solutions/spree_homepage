@@ -1,7 +1,24 @@
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @home_page_field } %>
 
+<div class="row">
+  <div class="col-sm-6">
+    <%= f.field_container :field_type, class: ['form-group'] do %>
+      <%= f.label :field_type %>
+      <%= f.select(:field_type, Spree::HomePageField::FIELDS.map { |o| [o.capitalize, o] }, { include_blank: false }, { class: 'select2' }) %>
+      <%= f.error_message_on :field_type %>
+    <% end %>
+      </div>
+      <div class="col-sm-6">
+     <%= f.field_container :home_page_section_id, class: ['form-group'] do %>
+      <%= f.label :home_page_section_id %>
+      <%= f.collection_select(:home_page_section_id, Spree::HomePageSection.all, :id, :name, {}, { class: 'select2' }) %>
+      <%= f.error_message_on :home_page_section_id %>
+    <% end %>
+  </div>
+</div>
+
 <div class="row" id="general_fields">
-  <div class="col-xs-12">
+  <div class="col-sm-12">
     <%= f.field_container :title, class: ['form-group'] do %>
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control' %>
@@ -19,21 +36,5 @@
       <%= f.file_field :image %>
     <% end %>
 
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <%= f.field_container :field_type, class: ['form-group'] do %>
-      <%= f.label :field_type %>
-      <%= f.select(:field_type, Spree::HomePageField::FIELDS.map { |o| [o.capitalize, o] }, { include_blank: true }, { class: 'select2' }) %>
-      <%= f.error_message_on :field_type %>
-    <% end %>
-      </div>
-      <div class="col-sm-6">
-     <%= f.field_container :home_page_section_id, class: ['form-group'] do %>
-      <%= f.label :home_page_section_id %>
-      <%= f.collection_select(:home_page_section_id, Spree::HomePageSection.all, :id, :name, {}, { class: 'select2' }) %>
-      <%= f.error_message_on :home_page_section_id %>
-    <% end %>
   </div>
 </div>
