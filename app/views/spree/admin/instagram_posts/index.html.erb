@@ -15,7 +15,7 @@
   <% if @instagram_posts.any?%>
     <%= render 'table', instagram_posts: @instagram_posts %>
   <% else %>
-    <div class="col-12 text-center">
+    <div class="col-xs-12 text-center">
       <%= button_link_to Spree.t(:load_posts_from_api), download_admin_instagram_posts_path, class: "btn-primary", icon: 'download' %>
     </div>
   <% end %>
@@ -25,7 +25,7 @@
     <%= Spree.t(:please_connect_instagram) %>
   </div>
   <div class="row">
-    <div class="col-12 text-center">
+    <div class="col-xs-12 text-center">
       <%= button_link_to Spree.t(:connect), admin_instagram_callbacks_connect_path, class: "btn-success", icon: 'add' %>
     </div>
   </div>
