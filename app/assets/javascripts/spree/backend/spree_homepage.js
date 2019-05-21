@@ -1,7 +1,6 @@
-// Placeholder manifest file.
-// the installer will append this file to the app vendored assets here: vendor/assets/javascripts/spree/backend/all.js'
+//= require spree/backend
 
-var homePageFieldForm = function() {
+$(function () {
   var elements = {
     fieldType: $('#home_page_field_field_type'),
     content: $('#home_page_field_content_field'),
@@ -20,8 +19,4 @@ var homePageFieldForm = function() {
     switchView()
     elements.fieldType.on('change', switchView)
   }
-}
-
-$(function() {
-  homePageFieldForm()
 })
