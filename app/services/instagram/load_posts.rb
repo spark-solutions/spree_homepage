@@ -23,7 +23,7 @@ module Instagram
       @feed.each do |post|
         Spree::InstagramPost.find_or_create_by(instagram_id: post.id) do |instagram_post|
           instagram_post.data = post.to_json
-          instagram_post.spree_instagram_setting_id = @settings_id
+          instagram_post.instagram_setting_id = @settings_id
           instagram_post.show = true
         end
       end
