@@ -1,14 +1,19 @@
-class Spree::HomePageSection < ApplicationRecord
-  has_many :home_page_fields
+module Spree
+  class HomePageSection < ApplicationRecord
+    acts_as_list
 
-  validates_presence_of :title
-  validates_uniqueness_of :title, :name
+    has_many :home_page_fields
 
-  before_save :assign_name
+    validates :title, presence: true
+    validates :title, uniqueness: true
+    validates :name, uniqueness: true
 
-  private
+    before_save :assign_name
 
-  def assign_name
-    self.name = self.title.parameterize.underscore
+    private
+
+    def assign_name
+      self.name = title.parameterize.underscore
+    end
   end
 end
