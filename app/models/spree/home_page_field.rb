@@ -7,14 +7,15 @@ class Spree::HomePageField < ApplicationRecord
   belongs_to :home_page_section
   has_one :image, as: :viewable, dependent: :destroy, class_name: 'Spree::HomePageFieldImage'
 
-  validates_presence_of :title, :field_type
-  validates_uniqueness_of :title, :name
+  validates :title, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :field_type, presence: true
 
-  before_save :assign_name
+  before_validation :assign_name
 
   private
 
   def assign_name
-    self.name = self.title.parameterize.underscore
+    self.name = title.parameterize.underscore if name.blank?
   end
 end

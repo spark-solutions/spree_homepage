@@ -31,7 +31,7 @@ module Spree
       end
 
       def home_page_field_params
-        params.require(:home_page_field).permit(:title, :content, :field_type, :home_page_section_id)
+        params.require(:home_page_field).permit(:name, :title, :content, :field_type, :home_page_section_id)
       end
     end
   end
