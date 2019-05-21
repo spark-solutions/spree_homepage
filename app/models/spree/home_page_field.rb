@@ -10,7 +10,7 @@ class Spree::HomePageField < ApplicationRecord
   validates_presence_of :title, :field_type
   validates_uniqueness_of :title, :name
 
-  before_create :assign_name
+  before_save :assign_name
 
   private
 
