@@ -4,7 +4,6 @@ module Spree
 
     has_many :home_page_fields
 
-    validates :title, presence: true
     validates :name, presence: true, uniqueness: true
 
     before_validation :assign_name
