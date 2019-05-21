@@ -4,20 +4,29 @@
 
 <% content_for :page_actions do %>
   <% if @instagram_settings.code.present? %>
+    <%= button_link_to Spree.t(:disconnect), admin_instagram_settings_path, method: :delete, class: "btn-danger", icon: 'remove' %>
     <%= button_link_to Spree.t(:load_posts_from_api), download_admin_instagram_posts_path, class: "btn-primary", icon: 'download' %>
+  <% else %>
+    <%= button_link_to Spree.t(:connect), admin_instagram_callbacks_connect_path, class: "btn-success", icon: 'add' %>
   <% end %>
-  <%= button_link_to Spree.t(:instagram_settings), edit_admin_instagram_settings_path, class: 'btn btn-primary' %>
 <% end %>
 
 <% if @instagram_settings.code.present? %>
-  <%= render 'table', instagram_posts: @instagram_posts %>
+  <% if @instagram_posts.any?%>
+    <%= render 'table', instagram_posts: @instagram_posts %>
+  <% else %>
+    <div class="col-12 text-center">
+      <%= button_link_to Spree.t(:load_posts_from_api), download_admin_instagram_posts_path, class: "btn-primary", icon: 'download' %>
+    </div>
+  <% end %>
 <% else %>
+
   <div class="alert alert-warning">
-    <%= Spree.t(:please_setup_instagram) %>
+    <%= Spree.t(:please_connect_instagram) %>
   </div>
   <div class="row">
     <div class="col-12 text-center">
-      <%= button_link_to Spree.t(:instagram_settings), edit_admin_instagram_settings_path, class: 'btn btn-primary' %>
+      <%= button_link_to Spree.t(:connect), admin_instagram_callbacks_connect_path, class: "btn-success", icon: 'add' %>
     </div>
   </div>
 <% end %>

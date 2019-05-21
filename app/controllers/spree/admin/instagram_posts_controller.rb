@@ -8,7 +8,11 @@ module Spree
       def index; end
 
       def download
-        Instagram::LoadPosts.new(@instagram_settings.id).call
+        if Instagram::LoadPosts.new(@instagram_settings.id).call
+          flash[:success] = Spree.t(:instagram_posts_downloaded)
+        else
+          flash[:error] = Spree.t(:instagram_posts_downloaded_error)
+        end
         redirect_to action: :index
       end
 
@@ -22,11 +26,9 @@ module Spree
 
       private
 
-      attr_reader :resource
-
       def load_resource
         @instagram_posts ||= Spree::InstagramPost.order(created_at: :desc)
-        @instagram_settings ||= Spree::InstagramSetting.first
+        @instagram_settings ||= Spree::InstagramSetting.first_or_create
       end
     end
   end

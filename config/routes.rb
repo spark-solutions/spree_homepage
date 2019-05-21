@@ -7,7 +7,7 @@ Spree::Core::Engine.add_routes do
       end
     end
     resources :home_page_fields
-    resource :instagram_settings, only: %i[edit update destroy]
+    resource :instagram_settings, only: %i[destroy]
     resources :instagram_posts, only: [:index] do
       collection do
         get :download
