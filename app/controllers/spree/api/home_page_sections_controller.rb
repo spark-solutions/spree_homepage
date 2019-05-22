@@ -1,25 +1,29 @@
 module Spree
   module Api
-    class HomePageSectionsController < Spree::Api::V2::BaseController
-      def index
-        render_serialized_payload { serialize_resource(resource) }
-      end
+    module V2
+      module Storefront
+        class HomePageSectionsController < Spree::Api::V2::BaseController
+          def index
+            render_serialized_payload { serialize_resource(resource) }
+          end
 
-      private
+          private
 
-      def resource
-        Spree::HomePageSection.includes(:home_page_fields)
-      end
+          def resource
+            Spree::HomePageSection.includes(:home_page_fields)
+          end
 
-      def resource_serializer
-        Spree::V2::Storefront::HomePageSectionSerializer
-      end
+          def resource_serializer
+            Spree::V2::Storefront::HomePageSectionSerializer
+          end
 
-      def serialize_resource(resource)
-        resource_serializer.new(
-          resource,
-          include: [:home_page_fields]
-        ).serializable_hash
+          def serialize_resource(resource)
+            resource_serializer.new(
+              resource,
+              include: [:home_page_fields]
+            ).serializable_hash
+          end
+        end
       end
     end
   end
