@@ -5,6 +5,7 @@ class Spree::HomePageField < ApplicationRecord
   ].freeze
 
   belongs_to :home_page_section
+  belongs_to :home_page_field_type
   has_one :image, as: :viewable, dependent: :destroy, class_name: 'Spree::HomePageFieldImage'
 
   validates :name, presence: true, uniqueness: true
