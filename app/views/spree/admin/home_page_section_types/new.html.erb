@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:section_types), spree.admin_home_page_section_types_url %> /
+  <%= Spree.t(:new_section_type) %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @home_page_section_type } %>
+
+<%= form_for [:admin, @home_page_section_type] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

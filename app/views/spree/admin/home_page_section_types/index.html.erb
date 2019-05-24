@@ -1,0 +1,28 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::HomePageSectionType) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_section_type), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_section_type' } %>
+<% end if can? :create, Spree::HomePageSectionType %>
+
+<table class="table" id='listing_countries' data-hook>
+  <thead>
+    <tr data-hook="tax_header">
+      <th><%= Spree.t(:name) %></th>
+      <th><%= Spree.t(:fields) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @home_page_section_types.each do |section_type| %>
+      <tr id="<%= spree_dom_id section_type %>" data-hook="section_type_row">
+        <td><%= section_type.name %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(section_type, no_text: true) if can? :edit, section_type %>
+          <%= link_to_delete(section_type, no_text: true) if can? :delete, section_type %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
