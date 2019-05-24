@@ -5,7 +5,7 @@
     <div class="col-sm-6">
       <%= f.field_container :home_page_section, class: ['form-group'] do %>
         <%= f.label :home_page_section, Spree.t(:section) %>
-        <%= f.select :home_page_section_id, Spree::HomePageSection.all.map { |s| [s.name , s.id, 'data-home-page-field-types': s.home_page_section_type.home_page_field_type_ids] }, {}, { class: "select2" } %>
+        <%= f.select :home_page_section_id, Spree::HomePageSection.all.map { |s| [s.name , s.id, 'data-home-page-field-types': s.home_page_section_type&.home_page_field_type_ids] }, {}, { class: "select2" } %>
         <%= f.error_message_on :home_page_section %>
       <% end %>
     </div>

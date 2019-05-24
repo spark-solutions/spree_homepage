@@ -3,9 +3,11 @@
 
 en:
   spree:
-    home_page_settings: "Home page settings"
-    instagram_posts: "Instagram Posts"
-    load_posts_from_api: "Load Posts from API"
-    instagram_connected: "Instagram Connected"
-    instagram_disconnected: "Instagram Disconnected"
-    instagram_posts_downloaded: "Instagram posts downloaded"
+    home_page_settings: Home page settings
+    instagram_posts: Instagram Posts
+    load_posts_from_api: Load Posts from API
+    instagram_connected: Instagram Connected
+    instagram_disconnected: Instagram Disconnected
+    instagram_posts_downloaded: Instagram posts downloaded
+    section_visible: Visible (Mobile)
+    create_field: Create Field

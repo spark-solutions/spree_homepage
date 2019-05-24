@@ -24,7 +24,7 @@
           <td><%= link_to field.name, edit_admin_home_page_field_path(field) %></td>
           <td><%= field.title %></td>
           <td>
-            <% if field.home_page_field_type.field_type === 'image' %>
+            <% if field.home_page_field_type&.field_type === 'image' %>
               <%= image_tag main_app.url_for(field.image.url(:thumbnail)) if field.image %>
             <% else %>
               <%= field.content %>
