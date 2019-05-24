@@ -1,18 +1,39 @@
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @home_page_field } %>
 
+<% if @section_types.empty? %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageSection)) %>,
+    <%= link_to Spree.t(:add_one), new_admin_home_page_section_path if can?(:create, Spree::HomePageSection) %>!
+  </div>
+<% end %>
+
+<% if @section_types.empty? %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageSectionType)) %>,
+    <%= link_to Spree.t(:add_one), new_admin_home_page_section_type_path if can?(:create, Spree::HomePageSectionType) %>!
+  </div>
+<% end %>
+
+<% if @field_types.empty? %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageFieldType)) %>,
+    <%= link_to Spree.t(:add_one), new_admin_home_page_field_type_path if can?(:create, Spree::HomePageFieldType) %>!
+  </div>
+<% end %>
+
 <div class="home-page-field-form">
   <div class="row">
     <div class="col-sm-6">
       <%= f.field_container :home_page_section, class: ['form-group'] do %>
         <%= f.label :home_page_section, Spree.t(:section) %>
-        <%= f.select :home_page_section_id, Spree::HomePageSection.all.map { |s| [s.name , s.id, 'data-home-page-field-types': s.home_page_section_type&.home_page_field_type_ids] }, {}, { class: "select2" } %>
+        <%= f.select :home_page_section_id, @sections.map { |s| [s.name , s.id, 'data-home-page-field-types': s.home_page_section_type&.home_page_field_type_ids] }, {}, { class: "select2" } %>
         <%= f.error_message_on :home_page_section %>
       <% end %>
     </div>
     <div class="col-sm-6">
       <%= f.field_container :home_page_field_type, class: ['form-group'] do %>
         <%= f.label :home_page_field_type, Spree.t(:type) %>
-        <%= f.select :home_page_field_type_id, Spree::HomePageFieldType.all.map { |ft| [ft.name , ft.id, 'data-type': ft.field_type] }, { include_blank: true }, { class: "select2" } %>
+        <%= f.select :home_page_field_type_id, @field_types.map { |ft| [ft.name , ft.id, 'data-type': ft.field_type] }, { include_blank: true }, { class: "select2" } %>
         <%= f.error_message_on :home_page_field_type %>
       <% end %>
     </div>

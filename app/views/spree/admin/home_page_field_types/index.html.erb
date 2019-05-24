@@ -6,24 +6,31 @@
   <%= button_link_to Spree.t(:new_field_type), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_field_type' } %>
 <% end if can? :create, Spree::HomePageFieldType %>
 
-<table class="table" id='listing_countries' data-hook>
-  <thead>
-    <tr data-hook="tax_header">
-      <th><%= Spree.t(:name) %></th>
-      <th><%= Spree.t(:type) %></th>
-      <th class="actions"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @home_page_field_types.each do |field_type| %>
-      <tr id="<%= spree_dom_id field_type %>" data-hook="field_type_row">
-        <td><%= field_type.name %></td>
-        <td><%= field_type.field_type.capitalize %></td>
-        <td class="actions actions-2 text-right">
-          <%= link_to_edit(field_type, no_text: true) if can? :edit, field_type %>
-          <%= link_to_delete(field_type, no_text: true) if can? :delete, field_type %>
-        </td>
+<% if @home_page_field_types.any? %>
+  <table class="table" id='listing_countries' data-hook>
+    <thead>
+      <tr data-hook="tax_header">
+        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:type) %></th>
+        <th class="actions"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @home_page_field_types.each do |field_type| %>
+        <tr id="<%= spree_dom_id field_type %>" data-hook="field_type_row">
+          <td><%= field_type.name %></td>
+          <td><%= field_type.field_type.capitalize %></td>
+          <td class="actions actions-2 text-right">
+            <%= link_to_edit(field_type, no_text: true) if can? :edit, field_type %>
+            <%= link_to_delete(field_type, no_text: true) if can? :delete, field_type %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageFieldType)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url if can?(:create, Spree::HomePageFieldType) %>!
+  </div>
+<% end %>

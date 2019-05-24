@@ -1,10 +1,17 @@
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @home_page_section } %>
 
+<% if @section_types.empty? %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::HomePageSectionType)) %>,
+    <%= link_to Spree.t(:add_one), new_admin_home_page_section_type_path if can?(:create, Spree::HomePageSectionType) %>!
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-sm-12">
     <%= f.field_container :home_page_section_type_id, class: ['form-group'] do %>
       <%= f.label :home_page_section_type_id, Spree.t(:section_type) %>
-      <%= f.collection_select(:home_page_section_type_id, Spree::HomePageSectionType.all, :id, :name, {}, { class: 'select2' }) %>
+      <%= f.collection_select(:home_page_section_type_id, @section_types, :id, :name, {}, { class: 'select2' }) %>
       <%= f.error_message_on :home_page_section_type_id %>
     <% end %>
     <%= f.field_container :name, class: ['form-group'] do %>
