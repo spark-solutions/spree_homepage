@@ -3,6 +3,10 @@
   <%= @home_page_section_type.name %>
 <% end %>
 
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_field_type), new_admin_home_page_field_type_path, { class: "btn-default", icon: 'add' } %>
+<% end if can? :create, Spree::HomePageFieldType %>
+
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @home_page_section_type } %>
 
 <%= form_for [:admin, @home_page_section_type] do |f| %>
