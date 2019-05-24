@@ -1,0 +1,28 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::HomePageFieldType) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_field_type), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_field_type' } %>
+<% end if can? :create, Spree::HomePageFieldType %>
+
+<table class="table" id='listing_countries' data-hook>
+  <thead>
+    <tr data-hook="tax_header">
+      <th><%= Spree.t(:name) %></th>
+      <th><%= Spree.t(:field_type) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @home_page_field_types.each do |field_type| %>
+      <tr id="<%= spree_dom_id field_type %>" data-hook="field_type_row">
+        <td><%= field_type.name %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(field_type, no_text: true) if can? :edit, field_type %>
+          <%= link_to_delete(field_type, no_text: true) if can? :delete, field_type %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
