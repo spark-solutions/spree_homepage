@@ -3,6 +3,10 @@
   <%= @home_page_field.name %>
 <% end %>
 
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_field_type), new_admin_home_page_field_type_path, { class: "btn-default", icon: 'add' } %>
+<% end if can? :create, Spree::HomePageFieldType %>
+
 <%= form_for @home_page_field, url: object_url, method: :put do |f| %>
   <div class="row">
     <div class="col-sm-12">

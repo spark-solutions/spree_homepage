@@ -8,7 +8,7 @@
 
   <%= f.field_container :field_type, class: ['form-group'] do %>
     <%= f.label :field_type %>
-    <%= f.select(:field_type, Spree::HomePageFieldType::FIELDS.map { |o| [o.capitalize, o] }, { include_blank: false }, { class: 'select2' }) %>
+    <%= f.select(:field_type, Spree::HomePageFieldType::FIELDS.map { |type| [type.capitalize, type] }, { include_blank: false }, { class: 'select2' }) %>
     <%= f.error_message_on :field_type %>
   <% end %>
   </div>

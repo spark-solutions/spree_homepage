@@ -12,8 +12,8 @@
       <tr>
         <th><%= Spree.t(:name) %></th>
         <th><%= Spree.t(:title) %></th>
-        <th><%= Spree.t(:field_type) %></th>
         <th><%= Spree.t(:content) %></th>
+        <th><%= Spree.t(:type) %></th>
         <th><%= Spree.t(:section) %></th>
         <th data-hook="admin_home_page_fields_index_header_actions" class="actions"></th>
       </tr>
@@ -23,8 +23,14 @@
         <tr id="<%= spree_dom_id field %>">
           <td><%= link_to field.name, edit_admin_home_page_field_path(field) %></td>
           <td><%= field.title %></td>
+          <td>
+            <% if field.home_page_field_type.field_type === 'image' %>
+              <%= image_tag main_app.url_for(field.image.url(:thumbnail)) if field.image %>
+            <% else %>
+              <%= field.content %>
+            <% end %>
+          </td>
           <td><%= field.home_page_field_type&.name %></td>
-          <td><%= field.content %></td>
           <td><%= field.home_page_section ? (link_to field.home_page_section&.name, edit_admin_home_page_section_path(field.home_page_section)) : '' %></td>
           <td class="actions actions-2" data-hook="admin_home_page_fields_index_row_actions">
             <%= link_to_edit field, no_text: true if can?(:edit, field) %>
