@@ -1,9 +1,9 @@
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @home_page_section } %>
 
-<div class="row" id="general_fields" >
+<div class="row">
   <div class="col-sm-12">
     <%= f.field_container :home_page_section_type_id, class: ['form-group'] do %>
-      <%= f.label :home_page_section_type_id %>
+      <%= f.label :home_page_section_type_id, Spree.t(:section_type) %>
       <%= f.collection_select(:home_page_section_type_id, Spree::HomePageSectionType.all, :id, :name, {}, { class: 'select2' }) %>
       <%= f.error_message_on :home_page_section_type_id %>
     <% end %>
@@ -21,17 +21,20 @@
 
     <%= f.field_container :description, class: ['form-group'] do %>
       <%= f.label :description %>
-      <%= f.text_field :description, class: 'form-control' %>
+      <%= f.text_area :description, class: 'form-control' %>
     <% end %>
-
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
     <%= f.field_container :visible, class: ['form-group'] do %>
       <%= f.label :visible %>
       <%= f.check_box :visible, class: 'form-control' %>
     <% end %>
+  </div>
+  <div class="col-sm-6">
     <%= f.field_container :mobile_visible, class: ['form-group'] do %>
       <%= f.label :mobile_visible %>
       <%= f.check_box :mobile_visible, class: 'form-control' %>
-    <% end %>
-
-  </div>
+    <% end %></div>
 </div>
