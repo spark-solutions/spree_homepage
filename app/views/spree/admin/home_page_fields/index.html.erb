@@ -23,7 +23,7 @@
         <tr id="<%= spree_dom_id field %>">
           <td><%= link_to field.name, edit_admin_home_page_field_path(field) %></td>
           <td><%= field.title %></td>
-          <td><%= field.field_type %></td>
+          <td><%= field.home_page_field_type&.name %></td>
           <td><%= field.content %></td>
           <td><%= field.home_page_section ? (link_to field.home_page_section&.name, edit_admin_home_page_section_path(field.home_page_section)) : '' %></td>
           <td class="actions actions-2" data-hook="admin_home_page_fields_index_row_actions">

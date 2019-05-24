@@ -10,8 +10,8 @@
 <div class="row">
   <div class="col-sm-6">
     <%= f.field_container :home_page_field_type_ids, class: ['form-group'] do %>
-      <%= f.label :home_page_field_type_ids %>
-      <%= f.select :home_page_field_type_ids, Spree::HomePageFieldType.all.map { |ft| [ft.name , ft.id] }, {}, { multiple: true, class: "select2" } %>
+      <%= f.label :home_page_field_type_ids, Spree.t(:available_field_types) %>
+      <%= f.select :home_page_field_type_ids, Spree::HomePageFieldType.all.map { |ft| ["#{ft.name} (#{ft.field_type})" , ft.id] }, {}, { multiple: true, class: "select2" } %>
       <%= f.error_message_on :home_page_field_type_ids %>
     <% end %>
   </div>
