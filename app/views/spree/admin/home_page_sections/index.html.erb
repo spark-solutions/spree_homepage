@@ -13,6 +13,7 @@
       <tr>
         <th></th>
         <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:section_type) %></th>
         <th><%= Spree.t(:title) %></th>
         <th><%= Spree.t(:description) %></th>
         <th><%= Spree.t(:visible) %></th>
@@ -27,6 +28,7 @@
             <span class="icon icon-sort handle"></span>
           </td>
           <td><%= link_to section.name, edit_admin_home_page_section_path(section) %></td>
+          <td><%= section.home_page_section_type&.name %></td>
           <td><%= section.title %></td>
           <td><%= section.description %></td>
           <td><%= section.visible %> (<%= Spree.t(:mobile) %>: <%= section.mobile_visible %>)</td>

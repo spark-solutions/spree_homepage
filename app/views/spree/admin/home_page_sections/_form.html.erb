@@ -2,6 +2,11 @@
 
 <div class="row" id="general_fields" >
   <div class="col-sm-12">
+    <%= f.field_container :home_page_section_type_id, class: ['form-group'] do %>
+      <%= f.label :home_page_section_type_id %>
+      <%= f.collection_select(:home_page_section_type_id, Spree::HomePageSectionType.all, :id, :name, {}, { class: 'select2' }) %>
+      <%= f.error_message_on :home_page_section_type_id %>
+    <% end %>
     <%= f.field_container :name, class: ['form-group'] do %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
