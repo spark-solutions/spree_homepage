@@ -1,5 +1,5 @@
 module Spree
-  class HomePageSection < ApplicationRecord
+  class HomePageSection < Spree::Base
     acts_as_list
 
     has_many :home_page_fields

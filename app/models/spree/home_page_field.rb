@@ -1,5 +1,5 @@
 module Spree
-  class HomePageField < ApplicationRecord
+  class HomePageField < Spree::Base
     belongs_to :home_page_section
     belongs_to :home_page_field_type
     has_one :image, as: :viewable, dependent: :destroy, class_name: 'Spree::HomePageFieldImage'

@@ -1,5 +1,5 @@
 module Spree
-  class HomePageFieldType < ApplicationRecord
+  class HomePageFieldType < Spree::Base
     FIELDS = %i[
       text
       image
