@@ -4,7 +4,11 @@ module Spree
       class HomePageFieldSerializer < BaseSerializer
         set_type :home_page_field
 
-        attributes :name, :title, :field_type, :content, :image
+        attributes :name, :title, :content
+        attribute :type do |field|
+          field.home_page_field_type&.name
+        end
+
         attribute :image do |field|
           field.image&.styles
         end
