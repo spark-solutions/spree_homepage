@@ -19,7 +19,8 @@ module Spree
 
           def serialize_resource(resource)
             resource_serializer.new(
-              resource
+              resource,
+              include: ['product.default_variant']
             ).serializable_hash
           end
         end
