@@ -1,7 +1,7 @@
-<%= form_for :spree_instagram_post, :url => update_visibility_admin_instagram_posts_path, :html => { :method => :post } do %>
+<%= form_for :spree_instagram_post, :url => update_all_admin_instagram_posts_path, :html => { :method => :post } do %>
   <div class="row">
     <div class="col-sm-12 text-right">
-      <%= button Spree.t(:update_visibility), 'save' %>
+      <%= button Spree.t(:save), 'save' %>
     </div>
   </div>
   <table class="table">
@@ -9,6 +9,7 @@
       <tr>
         <th><%= Spree.t(:id) %></th>
         <th><%= Spree.t(:thumbnail) %></th>
+        <th><%= Spree.t(:product) %></th>
         <th><%= Spree.t(:downloaded_at) %></th>
         <th><%= Spree.t(:visible) %></th>
       </tr>
@@ -19,6 +20,9 @@
     <tr>
       <td><%= post.id %></td>
       <td><img src="<%= thumbnail_url(post) %>"></td>
+      <td>
+        <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
+      </td>
       <td><%= pretty_time post.created_at %></td>
       <td>
         <%= post_fields.label :show %>
