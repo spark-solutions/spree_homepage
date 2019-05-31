@@ -1,20 +1,17 @@
-class Spree::HomePageField < ApplicationRecord
-  FIELDS = %i[
-    text
-    image
-  ].freeze
+module Spree
+  class HomePageField < Spree::Base
+    belongs_to :home_page_section
+    belongs_to :home_page_field_type
+    has_one :image, as: :viewable, dependent: :destroy, class_name: 'Spree::HomePageFieldImage'
 
-  belongs_to :home_page_section
-  has_one :image, as: :viewable, dependent: :destroy, class_name: 'Spree::HomePageFieldImage'
+    validates :name, presence: true, uniqueness: true
 
-  validates :name, presence: true, uniqueness: true
-  validates :field_type, presence: true
+    before_validation :assign_name
 
-  before_validation :assign_name
+    private
 
-  private
-
-  def assign_name
-    self.name = title.parameterize.underscore if name.blank?
+    def assign_name
+      self.name = title.parameterize.underscore if name.blank?
+    end
   end
 end

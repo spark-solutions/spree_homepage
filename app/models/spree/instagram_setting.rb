@@ -1,4 +1,4 @@
-class Spree::InstagramSetting < ApplicationRecord
+class Spree::InstagramSetting < Spree::Base
   has_many :instagram_posts, dependent: :destroy
 
   def self.access_token

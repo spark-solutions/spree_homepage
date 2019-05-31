@@ -3,15 +3,19 @@
   <%= @home_page_section.name %>
 <% end %>
 
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_section_type), new_admin_home_page_section_type_path, { class: "btn-default", icon: 'add' } %>
+<% end if can? :create, Spree::HomePageSectionType %>
+
 <div class="row">
   <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
-        <h1 class="card-title mb-0 h5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="mb-0 h5">
           <%= Spree.t(:edit_section) %> - <%= @home_page_section.name %>
         </h1>
       </div>
-      <div class="card-body">
+      <div class="card-body panel-body">
         <%= form_for @home_page_section, url: object_url, method: :put do |f| %>
             <%= render partial: 'form', locals: { f: f } %>
             <%= render partial: 'spree/admin/shared/edit_resource_links' %>
@@ -20,13 +24,13 @@
     </div>
   </div>
   <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
-        <h1 class="card-title mb-0 h5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="mb-0 h5">
           <%= Spree.t(:section_fields) %>
         </h1>
       </div>
-      <div class="card-body">
+      <div class="panel-body">
         <ul class="list-unstyled">
           <% @home_page_section.home_page_fields.each do |field| %>
             <li><%= link_to field.name, edit_admin_home_page_field_path(field) %></li>

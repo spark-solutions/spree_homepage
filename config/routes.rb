@@ -7,6 +7,8 @@ Spree::Core::Engine.add_routes do
       end
     end
     resources :home_page_fields
+    resources :home_page_section_types
+    resources :home_page_field_types
     resource :instagram_settings, only: %i[destroy]
     resources :instagram_posts, only: [:index] do
       collection do

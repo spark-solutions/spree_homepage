@@ -3,9 +3,9 @@
 <% end %>
 
 <% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_field), new_admin_home_page_field_path, { class: "btn-default", icon: 'add' } if can?(:create, Spree::HomePageField) %>
   <%= button_link_to Spree.t(:new_section), new_object_url, class: "btn-success", icon: 'add' %>
 <% end if can?(:create, Spree::HomePageSection) %>
-
 
 <% if @home_page_sections.any? %>
   <table class="table sortable" data-sortable-link="<%= update_positions_admin_home_page_sections_url %>">
@@ -13,10 +13,13 @@
       <tr>
         <th></th>
         <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:type) %></th>
         <th><%= Spree.t(:title) %></th>
         <th><%= Spree.t(:description) %></th>
-        <th><%= Spree.t(:visible) %></th>
-        <th><%= Spree.t(:fields) %></th>
+        <th><%= Spree.t(:section_visible) %></th>
+        <th>
+          <%= Spree.t(:fields) %>
+        </th>
         <th data-hook="admin_home_page_sections_index_header_actions" class="actions"></th>
       </tr>
     </thead>
@@ -27,10 +30,17 @@
             <span class="icon icon-sort handle"></span>
           </td>
           <td><%= link_to section.name, edit_admin_home_page_section_path(section) %></td>
+          <td><%= section.home_page_section_type&.name %></td>
           <td><%= section.title %></td>
           <td><%= section.description %></td>
-          <td><%= section.visible %> (<%= Spree.t(:mobile) %>: <%= section.mobile_visible %>)</td>
-          <td><%= section.home_page_fields.map(&:name).join(' ,') %></td>
+          <td>
+            <span class="icon icon-<%= section.visible ? 'ok' : 'remove' %>"></span> ( <span title="mobile" class="icon icon-<%= section.mobile_visible ? 'ok' : 'remove' %>"></span> )
+          </td>
+          <td>
+            <% section.home_page_fields.each do |field| %>
+              <%= link_to field.name, edit_admin_home_page_field_path(field) %>
+            <% end %>
+          </td>
           <td class="actions actions-2" data-hook="admin_home_page_sections_index_row_actions">
             <%= link_to_edit section, no_text: true if can?(:edit, section) %>
             <%= link_to_delete section, no_text: true if can?(:delete, section) %>
