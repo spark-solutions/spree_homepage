@@ -4,6 +4,7 @@ module Spree
       include Spree::Backend::Callbacks
 
       before_action :load_resource, only: %i[index download]
+      before_action :products, only: :index
 
       def index; end
 
@@ -16,11 +17,9 @@ module Spree
         redirect_to action: :index
       end
 
-      def update_visibility
-        params['instagram_post'].keys.each do |id|
-          post = Spree::InstagramPost.find(id.to_i)
-          post.update(show: params['instagram_post'][id]['show'])
-        end
+      def update_all
+        posts = params['instagram_post']
+        Spree::InstagramPost.update(posts.keys, posts.values)
         redirect_to action: :index
       end
 
@@ -29,6 +28,10 @@ module Spree
       def load_resource
         @instagram_posts ||= Spree::InstagramPost.order(created_at: :desc)
         @instagram_settings ||= Spree::InstagramSetting.first_or_create
+      end
+
+      def products
+        @products ||= Spree::Product.all
       end
     end
   end

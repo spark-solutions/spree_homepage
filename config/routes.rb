@@ -11,7 +11,7 @@ Spree::Core::Engine.add_routes do
     resources :instagram_posts, only: [:index] do
       collection do
         get :download
-        post :update_visibility
+        post :update_all
       end
     end
     namespace :instagram_callbacks do
