@@ -1,9 +1,9 @@
 module Spree
   module Admin
     class HomePageFieldsController < ResourceController
-      before_action :section_types, only: %i[new edit]
-      before_action :field_types, only: %i[new edit]
-      before_action :sections, only: %i[new edit]
+      before_action :section_types
+      before_action :field_types
+      before_action :sections
 
       def create
         @home_page_field = Spree::HomePageField.new(home_page_field_params)
