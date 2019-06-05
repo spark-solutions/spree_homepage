@@ -10,7 +10,7 @@ module Spree
         end
 
         attribute :image do |field|
-          field.image&.styles
+          field.image&.styles if field.home_page_field_type&.field_type == 'image'
         end
 
         has_one :home_page_field_image, id_method_name: :image_id
