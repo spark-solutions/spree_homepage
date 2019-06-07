@@ -21,10 +21,11 @@ module Instagram
 
     def create_records
       @feed.each do |post|
-        Spree::InstagramPost.find_or_create_by(instagram_id: post.id) do |instagram_post|
-          instagram_post.data = post.to_json
-          instagram_post.instagram_setting_id = @settings_id
-          instagram_post.show = true
+        instagram_post = Spree::InstagramPost.find_by(instagram_id: post.id)
+        if instagram_post
+          instagram_post.update(data: post.to_json)
+        else
+          Spree::InstagramPost.create(instagram_id: post.id, data: post.to_json, instagram_setting_id: @settings_id, show: true)
         end
       end
     end
