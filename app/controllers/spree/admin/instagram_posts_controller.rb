@@ -9,7 +9,7 @@ module Spree
       def index; end
 
       def download
-        if Instagram::LoadPosts.new(@instagram_settings.id).call
+        if Instagram::LoadPosts.new(@instagram_settings).call
           flash[:success] = Spree.t(:instagram_posts_downloaded)
         else
           flash[:error] = Spree.t(:instagram_posts_downloaded_error)

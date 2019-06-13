@@ -4,11 +4,12 @@
       <%= button Spree.t(:save), 'save' %>
     </div>
   </div>
-  <table class="table">
+  <table class="table instagram-posts">
     <thead>
       <tr>
         <th><%= Spree.t(:id) %></th>
         <th><%= Spree.t(:thumbnail) %></th>
+        <th><%= Spree.t(:like_count) %></th>
         <th><%= Spree.t(:product) %></th>
         <th><%= Spree.t(:downloaded_at) %></th>
         <th><%= Spree.t(:visible) %></th>
@@ -19,7 +20,8 @@
       <%= fields_for "instagram_post[]", post do |post_fields| %>
     <tr>
       <td><%= post.id %></td>
-      <td><img src="<%= thumbnail_url(post) %>"></td>
+      <td><img class="thumbnail" src="<%= thumbnail_url(post) %>"></td>
+      <td><%= JSON.parse(post.data)['like_count'] %></td>
       <td>
         <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
       </td>

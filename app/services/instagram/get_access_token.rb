@@ -1,7 +1,5 @@
 module Instagram
   class GetAccessToken
-    attr_reader :code, :redirect_uri, :response
-
     def initialize(code, redirect_uri)
       @code = code
       @redirect_uri = redirect_uri
@@ -10,21 +8,30 @@ module Instagram
     def call
       make_request
       set_access_token
-      set_code
+      set_user_id
     end
 
     private
 
     def make_request
-      @response = Instagram.get_access_token(code, redirect_uri: redirect_uri)
+      app_id = Rails.application.credentials.facebook_app_id
+      app_secret = Rails.application.credentials.facebook_app_secret
+      oauth = Koala::Facebook::OAuth.new(app_id, app_secret, @redirect_uri)
+      @access_token = oauth.get_access_token(@code)
     end
 
-    def set_code
-      Spree::InstagramSetting.set_code(code)
+    def user_id
+      graph = Koala::Facebook::API.new(@access_token)
+      accounts = graph.get_object('me?fields=accounts{instagram_business_account}') { |data| data['accounts'] }
+      accounts['data'].first['instagram_business_account']['id']
+    end
+
+    def set_user_id
+      Spree::InstagramSetting.user_id = user_id
     end
 
     def set_access_token
-      Spree::InstagramSetting.set_access_token(response.access_token)
+      Spree::InstagramSetting.access_token = @access_token
     end
   end
 end

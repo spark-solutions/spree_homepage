@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-sm-12">
+    <%= form_for instagram_settings, url: {controller: :instagram_settings, action: :update} do |f| %>
+      <%= f.label :hashtag %>
+      <div class="input-group">
+        <%= f.text_field :hashtag, class: 'form-control'  %>
+        <span class="input-group-btn">
+          <%= f.submit Spree.t(:change_hashtag), class: 'btn btn-primary btn-success' %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

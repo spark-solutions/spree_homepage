@@ -4,14 +4,14 @@ module Spree
       include Spree::Backend::Callbacks
 
       def connect
-        redirect_to Instagram.authorize_url(redirect_uri: admin_instagram_callbacks_callback_url, scope: 'public_content')
+        redirect_to Instagram::GetLoginUrl.new(admin_instagram_callbacks_callback_url).call
       end
 
       def callback
-        if Instagram::GetAccessToken.new(params[:code], admin_instagram_callbacks_callback_url).call
-          flash[:success] = Spree.t(:instagram_connected)
+        if params[:code] && Instagram::GetAccessToken.new(params[:code], admin_instagram_callbacks_callback_url).call
+          flash[:success] = params
         else
-          flash[:error] = Spree.t(:failed, resource: Spree.t(:instagram_callback))
+          flash[:error] = params[:error_message]
         end
 
         redirect_to admin_instagram_posts_path
