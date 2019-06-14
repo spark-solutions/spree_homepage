@@ -9,7 +9,7 @@ module Spree
 
       def callback
         if params[:code] && Instagram::GetAccessToken.new(params[:code], admin_instagram_callbacks_callback_url).call
-          flash[:success] = params
+          flash[:success] = Spree.t(:instagram_connected)
         else
           flash[:error] = params[:error_message]
         end

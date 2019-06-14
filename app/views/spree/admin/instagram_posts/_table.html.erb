@@ -1,38 +1,48 @@
-<%= form_for :spree_instagram_post, :url => update_all_admin_instagram_posts_path, :html => { :method => :post } do %>
+<% if @instagram_posts.any?%>
+  <%= form_for :spree_instagram_post, :url => update_all_admin_instagram_posts_path(hashtag: hashtag), :html => { :method => :post } do %>
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <%= button_link_to Spree.t(:remove_all), destroy_all_admin_instagram_posts_path(hashtag: hashtag), class: "btn-danger", icon: 'remove' %>
+        <%= button_link_to Spree.t(:load_posts_from_api), download_admin_instagram_posts_path(hashtag: hashtag), class: "btn-primary", icon: 'download' %>
+        <%= button Spree.t(:update_posts), 'save' %>
+      </div>
+    </div>
+    <table class="table instagram-posts">
+      <thead>
+        <tr>
+          <th><%= Spree.t(:id) %></th>
+          <th><%= Spree.t(:thumbnail) %></th>
+          <th><%= Spree.t(:like_count) %></th>
+          <th><%= Spree.t(:product) %></th>
+          <th><%= Spree.t(:downloaded_at) %></th>
+          <th><%= Spree.t(:visible) %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% instagram_posts.each do |post| %>
+        <%= fields_for "instagram_post[]", post do |post_fields| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><img class="thumbnail" src="<%= thumbnail_url(post) %>"></td>
+        <td><%= JSON.parse(post.data)['like_count'] %></td>
+        <td>
+          <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
+        </td>
+        <td><%= pretty_time post.created_at %></td>
+        <td>
+          <%= post_fields.label :show %>
+          <%= post_fields.check_box :show %>
+        </td>
+      </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
   <div class="row">
-    <div class="col-sm-12 text-right">
-      <%= button Spree.t(:save), 'save' %>
+    <div class="col-sm-12 text-center">
+      <%= button_link_to Spree.t(:load_posts_from_api), download_admin_instagram_posts_path(hashtag: hashtag), class: "btn-primary", icon: 'download' %>
     </div>
   </div>
-  <table class="table instagram-posts">
-    <thead>
-      <tr>
-        <th><%= Spree.t(:id) %></th>
-        <th><%= Spree.t(:thumbnail) %></th>
-        <th><%= Spree.t(:like_count) %></th>
-        <th><%= Spree.t(:product) %></th>
-        <th><%= Spree.t(:downloaded_at) %></th>
-        <th><%= Spree.t(:visible) %></th>
-      </tr>
-    </thead>
-    <tbody>
-    <% instagram_posts.each do |post| %>
-      <%= fields_for "instagram_post[]", post do |post_fields| %>
-    <tr>
-      <td><%= post.id %></td>
-      <td><img class="thumbnail" src="<%= thumbnail_url(post) %>"></td>
-      <td><%= JSON.parse(post.data)['like_count'] %></td>
-      <td>
-        <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
-      </td>
-      <td><%= pretty_time post.created_at %></td>
-      <td>
-        <%= post_fields.label :show %>
-        <%= post_fields.check_box :show %>
-      </td>
-    </tr>
-      <% end %>
-    <% end %>
-    </tbody>
-  </table>
 <% end %>

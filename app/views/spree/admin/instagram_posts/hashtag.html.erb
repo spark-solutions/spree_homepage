@@ -1,0 +1,11 @@
+<%= render 'page_actions' %>
+
+<% if @instagram_settings.access_token.present? %>
+  <%= render 'navigation', active: :hashtag %>
+  <%= render 'hashtag_form', instagram_settings: @instagram_settings %>
+  <% unless @instagram_settings.hashtag_id.empty? %>
+    <%= render 'table', instagram_posts: @instagram_posts, hashtag: true %>
+  <% end %>
+<% else %>
+  <%= render 'no_connected' %>
+<% end %>

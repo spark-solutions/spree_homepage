@@ -29,6 +29,6 @@ class Spree::InstagramSetting < Spree::Base
   private
 
   def set_hashtag_id
-    hashtag_id = Instagram::GetHashtagId.new(self, hashtag).call
+    self.hashtag_id = hashtag.empty? ? '' : Instagram::GetHashtagId.new(self, hashtag).call
   end
 end
