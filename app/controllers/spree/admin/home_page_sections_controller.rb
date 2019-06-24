@@ -3,6 +3,10 @@ module Spree
     class HomePageSectionsController < ResourceController
       before_action :section_types, only: %i[new edit]
 
+      def index
+        @home_page_sections = Spree::HomePageSection.order(position: :asc)
+      end
+
       private
 
       def section_types
