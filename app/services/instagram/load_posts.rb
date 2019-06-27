@@ -39,7 +39,15 @@ module Instagram
           instagram_post.update(data: post.to_json)
         else
           hashtag_id = @hashtag ? @instagram_settings.hashtag_id : nil
-          Spree::InstagramPost.create(instagram_id: post['id'], data: post.to_json, instagram_setting_id: @instagram_settings.id, hashtag_id: hashtag_id, show: true)
+          if post['media_type'] == 'IMAGE'
+            Spree::InstagramPost.create(
+              instagram_id: post['id'],
+              data: post.to_json,
+              instagram_setting_id: @instagram_settings.id,
+              hashtag_id: hashtag_id,
+              show: true
+            )
+          end
         end
       end
     end
