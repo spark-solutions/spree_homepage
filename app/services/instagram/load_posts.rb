@@ -34,7 +34,8 @@ module Instagram
 
     def create_records
       @feed.each do |post|
-        instagram_post = Spree::InstagramPost.find_by(instagram_id: post['id'])
+        resources = @hashtag ? Spree::InstagramPost.hashtag : Spree::InstagramPost.user
+        instagram_post = resources.find_by(instagram_id: post['id'])
         if instagram_post
           instagram_post.update(data: post.to_json)
         else
