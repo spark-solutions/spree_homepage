@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="nav-item"><a class="nav-link <%= active == :user && 'active' %>" href="<%= admin_instagram_posts_path %> ">User</a></li>
+      <li role="presentation" class="nav-item"><a class="nav-link <%= active == :hashtag && 'active' %>" href="<%= hashtag_admin_instagram_posts_path %> ">Hashtag</a></li>
+    </ul>
+  </div>
+</div>

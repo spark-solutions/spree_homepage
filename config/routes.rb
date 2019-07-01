@@ -9,11 +9,13 @@ Spree::Core::Engine.add_routes do
     resources :home_page_fields
     resources :home_page_section_types
     resources :home_page_field_types
-    resource :instagram_settings, only: %i[destroy]
+    resource :instagram_settings, only: %i[destroy update]
     resources :instagram_posts, only: [:index] do
       collection do
         get :download
+        get :hashtag
         post :update_all
+        get :destroy_all
       end
     end
     namespace :instagram_callbacks do

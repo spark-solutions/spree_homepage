@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:instagram_posts) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <% if @instagram_settings.access_token.present? %>
+    <%= button_link_to Spree.t(:disconnect), admin_instagram_settings_path, method: :delete, class: "btn-danger", icon: 'remove' %>
+  <% else %>
+    <%= button_link_to Spree.t(:connect), admin_instagram_callbacks_connect_path, class: "btn-success", icon: 'add' %>
+  <% end %>
+<% end %>
