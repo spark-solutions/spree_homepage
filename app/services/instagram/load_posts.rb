@@ -23,8 +23,8 @@ module Instagram
     end
 
     def fields
-      default = 'caption,comments_count,id,like_count,media_type,media_url,permalink'
-      @hashtag ? default : "#{default},username"
+      default = "caption,comments_count,id,like_count,media_type,media_url,permalink"
+      @hashtag ? default : "#{default},username,owner{profile_picture_url,username,name}"
     end
 
     def media_url
@@ -35,18 +35,18 @@ module Instagram
     def create_records
       @feed.each do |post|
         resources = @hashtag ? Spree::InstagramPost.hashtag : Spree::InstagramPost.user
-        instagram_post = resources.find_by(instagram_id: post['id'])
+        instagram_post = resources.find_by(instagram_id: post["id"])
         if instagram_post
           instagram_post.update(data: post.to_json)
         else
           hashtag_id = @hashtag ? @instagram_settings.hashtag_id : nil
-          if post['media_type'] == 'IMAGE'
+          if post["media_type"] == "IMAGE"
             Spree::InstagramPost.create(
-              instagram_id: post['id'],
+              instagram_id: post["id"],
               data: post.to_json,
               instagram_setting_id: @instagram_settings.id,
               hashtag_id: hashtag_id,
-              show: true
+              show: true,
             )
           end
         end
