@@ -25,7 +25,7 @@ module Spree
           def serialize_resource(resource)
             resource_serializer.new(
               resource,
-              include: ['product.default_variant']
+              include: ['product.default_variant', :instagram_users]
             ).serializable_hash
           end
         end
