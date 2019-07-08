@@ -8,7 +8,7 @@
 <% end if can? :create, Spree::HomePageSectionType %>
 
 <% if @home_page_section_types.any? %>
-  <table class="table" id='listing_countries' data-hook>
+  <table class="table" data-hook>
     <thead>
       <tr data-hook="tax_header">
         <th><%= Spree.t(:name) %></th>

@@ -2,6 +2,14 @@
   display: none;
 }
 
+.instagram-posts .select2-container {
+  min-width: 100px;
+}
+
 .instagram-posts .thumbnail {
   max-height: 100px;
+}
+
+.instagram-posts .users {
+  display: flex;
 }
