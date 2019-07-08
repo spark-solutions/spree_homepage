@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:instagram_users), admin_instagram_users_url %> /
+  <%= @instagram_user.name %>
+<% end %>
+
+<%= form_for @instagram_user, url: collection_url do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <%= render partial: 'spree/admin/shared/new_resource_links' %>
+<% end %>
