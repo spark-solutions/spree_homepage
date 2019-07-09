@@ -3,26 +3,19 @@ module Spree
     include Configuration::ActiveStorage
     include Rails.application.routes.url_helpers
 
-    def image_url
-      create_path(:normal)
+    def image_url(base_url)
+      polymorphic_url(attachment.variant(resize: "1080x1080>"), host: base_url)
     end
 
     def styles
       self.class.styles.map do |_, size|
-        width, height = size[/(\d+)x(\d+)/].split('x')
-
+        width, height = size[/(\d+)x(\d+)/].split("x")
         {
-          url: create_path(size),
+          url: polymorphic_path(attachment.variant(resize: size), only_path: true),
           width: width,
           height: height,
         }
       end
-    end
-
-    private
-
-    def create_path(size)
-      polymorphic_path(attachment.variant(resize: size), only_path: true)
     end
   end
 end
