@@ -1,21 +1,22 @@
 module Spree
   module Admin
-    class InstagramPostsController < Spree::Admin::BaseController
+    class InstagramPostsController < ResourceController
       include Spree::Backend::Callbacks
 
       before_action :instagram_settings, only: %i[index hashtag download]
       before_action :products, only: %i[index hashtag]
+      before_action :instagram_users, only: %i[index hashtag]
       before_action :hashtag_param, only: %i[update_all download destroy_all]
 
       rescue_from Koala::Facebook::AuthenticationError, with: :facebook_error
       rescue_from Koala::Facebook::ClientError, with: :facebook_error
 
       def index
-        @instagram_posts ||= Spree::InstagramPost.user.order(created_at: :desc)
+        @instagram_posts = Spree::InstagramPost.user.order(created_at: :desc)
       end
 
       def hashtag
-        @instagram_posts ||= Spree::InstagramPost.hashtag.order(created_at: :desc)
+        @instagram_posts = Spree::InstagramPost.hashtag.order(created_at: :desc)
       end
 
       def download
@@ -48,6 +49,10 @@ module Spree
         @products ||= Spree::Product.all
       end
 
+      def instagram_users
+        @instagram_users ||= Spree::InstagramUser.all
+      end
+
       def hashtag_param
         @hashtag = params[:hashtag] == 'true'
       end
@@ -56,7 +61,6 @@ module Spree
         flash[:error] = exception
         redirect_to action: @hashtag ? :hashtag : :index
       end
-
     end
   end
 end

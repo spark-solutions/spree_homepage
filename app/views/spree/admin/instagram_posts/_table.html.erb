@@ -14,8 +14,11 @@
           <th><%= Spree.t(:thumbnail) %></th>
           <th><%= Spree.t(:like_count) %></th>
           <th><%= Spree.t(:product) %></th>
-          <th><%= Spree.t(:downloaded_at) %></th>
+          <% if hashtag %>
+            <th><%= Spree.t(:user) %></th>
+          <% end %>
           <th><%= Spree.t(:visible) %></th>
+          <th><%= Spree.t(:downloaded_at) %></th>
         </tr>
       </thead>
       <tbody>
@@ -28,11 +31,19 @@
         <td>
           <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
         </td>
-        <td><%= pretty_time post.created_at %></td>
+        <% if hashtag %>
+          <td>
+            <div class="users">
+              <%= post_fields.select(:instagram_user_id, @instagram_users.map { |user| [user.name, user.id] }, { include_blank: true }, { class: 'select2' }) %>
+              <%= button_link_to '', new_admin_instagram_user_path(post_id: post.id), class: "btn-sm", icon: 'add', title: Spree.t(:create_new_user) %>
+            </div>
+          </td>
+        <% end %>
         <td>
           <%= post_fields.label :show %>
           <%= post_fields.check_box :show %>
         </td>
+        <td><%= pretty_time post.created_at %></td>
       </tr>
         <% end %>
       <% end %>
