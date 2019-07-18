@@ -22,9 +22,9 @@ module Instagram
 
     def user_id
       graph = Koala::Facebook::API.new(@access_token)
-      accounts = graph.get_object("me?fields=accounts{connected_instagram_account,name}") { |data| data["accounts"] }
-      page = accounts["data"].find { |account| account["name"] == ENV["FB_PAGE_NAME"] } || accounts["data"].first 
-      page && page["connected_instagram_account"] ? page["connected_instagram_account"]["id"] : ""
+      accounts = graph.get_object("me?fields=accounts{instagram_business_account,username}") { |data| data["accounts"] }
+      page = accounts["data"].find { |account| account["username"] == ENV["FB_PAGE_USERNAME"] } || accounts["data"].first
+      page && page["instagram_business_account"] ? page["instagram_business_account"]["id"] : ""
     end
 
     def set_user_id
