@@ -12,6 +12,7 @@
         <tr>
           <th><%= Spree.t(:id) %></th>
           <th><%= Spree.t(:thumbnail) %></th>
+          <th><%= Spree.t(:caption) %></th>
           <th><%= Spree.t(:like_count) %></th>
           <th><%= Spree.t(:product) %></th>
           <% if hashtag %>
@@ -26,8 +27,9 @@
         <%= fields_for "instagram_post[]", post do |post_fields| %>
       <tr>
         <td><%= post.id %></td>
-        <td><img class="thumbnail" src="<%= thumbnail_url(post) %>"></td>
-        <td><%= JSON.parse(post.data)['like_count'] %></td>
+        <td><%= instagram_link(post, instagram_thumbnail(post)) %></td>
+        <td><%= instagram_link(post, instagram_data(post)['caption']) %></td>
+        <td><%= instagram_data(post)['like_count'] %></td>
         <td>
           <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
         </td>
