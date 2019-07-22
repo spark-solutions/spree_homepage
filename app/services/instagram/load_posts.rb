@@ -46,7 +46,7 @@ module Instagram
               data: post.to_json,
               instagram_setting_id: @instagram_settings.id,
               hashtag_id: hashtag_id,
-              show: true,
+              show: false,
             )
           end
         end
