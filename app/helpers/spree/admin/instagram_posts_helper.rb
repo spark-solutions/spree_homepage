@@ -9,10 +9,10 @@ module Spree
         link_to content, instagram_data(post)["permalink"]
       end
 
-      def instagram_thumbnail(post)
-        data = instagram_data(post)
-        tag = data["media_type"] == "VIDEO" ? :video : :img
-        content_tag(tag, nil, src: data["media_url"], class: "thumbnail")
+      def instagram_preview(post)
+        return image_tag(main_app.url_for(post.media.representation(resize: "100x100"))) if post.media.attached? && post.media.representable?
+
+        Spree.t(:no_preview)
       end
     end
   end
