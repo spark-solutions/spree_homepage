@@ -10,25 +10,31 @@ module Spree
           media_model.attached? ? media_url(media_model, base_url) : nil
         end
 
+        def hashtag_post_owner(post, base_url)
+          if post.instagram_user
+            {
+              "name" => post.instagram_user.name,
+              "username" => post.instagram_user.username,
+              "profile_picture_url" => post.instagram_user.image&.image_url(base_url),
+            }
+          end
+        end
+
         def hashtag_data(post, base_url)
           post_data = JSON.parse(post.data)
           post_data.merge({
-            owner: {
-              name: post.instagram_user.name,
-              username: post.instagram_user.username,
-              profile_picture_url: post.instagram_user.image&.image_url(base_url),
-            },
-            media_url: url_if_attached(post.media, base_url)
+            "owner" => hashtag_post_owner(post, base_url),
+            "media_url" => url_if_attached(post.media, base_url)
           })
         end
 
         def user_data(post, base_url)
           post_data = JSON.parse(post.data)
-          post_data.merge({
-            media_url: url_if_attached(post.media, base_url),
-            owner: post_data["owner"].merge({
-              profile_picture_url: url_if_attached(post.profile_picture_media, base_url)
-            })
+          post_data.deep_merge({
+            "media_url" => url_if_attached(post.media, base_url),
+            "owner" => {
+              "profile_picture_url" => url_if_attached(post.profile_picture_media, base_url)
+            }
           })
         end
       end
@@ -41,7 +47,7 @@ module Spree
         attribute :data do |post, params|
           base_url = params[:base_url]
 
-          if post.hashtag_id != nil && post.instagram_user
+          if post.hashtag_id != nil
             hashtag_data(post, base_url)
           else
             user_data(post, base_url)
