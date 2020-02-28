@@ -6,10 +6,34 @@
   min-width: 100px;
 }
 
-.instagram-posts .thumbnail {
-  max-height: 100px;
+.instagram-posts .preview-container {
+  width: 100px;
+  height: 100px;
+  background: #ECECEC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  overflow: hidden;
+  text-align: center;
 }
 
 .instagram-posts .users {
   display: flex;
+}
+
+.table.instagram-posts thead tr th {
+  white-space: nowrap;
+}
+
+.instagram-posts .instagram-posts-head-centered {
+  text-align: center;
+}
+
+.table.instagram-posts tbody tr td {
+  vertical-align: top;
+}
+
+.instagram-posts .instagram-posts-column-centered {
+  text-align: center;
 }

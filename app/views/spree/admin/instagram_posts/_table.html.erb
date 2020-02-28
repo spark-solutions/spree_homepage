@@ -10,16 +10,16 @@
     <table class="table instagram-posts">
       <thead>
         <tr>
-          <th><%= Spree.t(:id) %></th>
-          <th><%= Spree.t(:thumbnail) %></th>
+          <th class="instagram-posts-head-centered"><%= Spree.t(:id) %></th>
+          <th class="instagram-posts-head-centered"><%= Spree.t(:preview) %></th>
           <th><%= Spree.t(:caption) %></th>
-          <th><%= Spree.t(:like_count) %></th>
-          <th><%= Spree.t(:product) %></th>
+          <th class="instagram-posts-head-centered"><%= Spree.t(:like_count) %></th>
+          <th class="instagram-posts-head-centered"><%= Spree.t(:product) %></th>
           <% if hashtag %>
-            <th><%= Spree.t(:user) %></th>
+            <th class="instagram-posts-head-centered"><%= Spree.t(:user) %></th>
           <% end %>
-          <th><%= Spree.t(:visible) %></th>
-          <th><%= Spree.t(:downloaded_at) %></th>
+          <th class="instagram-posts-head-centered"><%= Spree.t(:visible) %></th>
+          <th class="instagram-posts-head-centered"><%= Spree.t(:downloaded_at) %></th>
         </tr>
       </thead>
       <tbody>
@@ -27,9 +27,9 @@
         <%= fields_for "instagram_post[]", post do |post_fields| %>
       <tr>
         <td><%= post.id %></td>
-        <td><%= instagram_link(post, instagram_thumbnail(post)) %></td>
+        <td><div class="preview-container"><%= instagram_preview(post) %></div></td>
         <td><%= instagram_link(post, instagram_data(post)['caption']) %></td>
-        <td><%= instagram_data(post)['like_count'] %></td>
+        <td class="instagram-posts-column-centered"><%= instagram_data(post)['like_count'] %></td>
         <td>
           <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
         </td>
@@ -41,10 +41,7 @@
             </div>
           </td>
         <% end %>
-        <td>
-          <%= post_fields.label :show %>
-          <%= post_fields.check_box :show %>
-        </td>
+        <td class="instagram-posts-column-centered"><%= post_fields.check_box :show %></td>
         <td><%= pretty_time post.created_at %></td>
       </tr>
         <% end %>

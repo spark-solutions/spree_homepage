@@ -3,15 +3,16 @@
 
 en:
   spree:
-    home_page_settings: Home page settings
+    home_page_settings: Home Page Settings
     instagram_posts: Instagram Posts
-    load_posts_from_api: Load from Instagram
+    load_posts_from_api: Load From Instagram
     instagram_connected: Instagram Connected
     instagram_disconnected: Instagram Disconnected
-    instagram_posts_downloaded: Instagram posts downloaded
+    instagram_posts_downloaded: Instagram Posts Downloaded
     section_visible: Visible (Mobile)
     create_field: Create Field
     change_hashtag: Change Hashtag
     add_hashtag: Add Hashtag
-    update_posts: Update
+    update_posts: Save Changes
     hashtag_saved: Hashtag Saved
+    no_preview: No Preview
