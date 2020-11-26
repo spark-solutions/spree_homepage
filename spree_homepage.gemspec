@@ -25,10 +25,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', spree_version
   s.add_dependency 'spree_backend', spree_version
   s.add_dependency 'spree_extension'
-  s.add_dependency 'koala'
+  s.add_dependency 'koala', '~> 3.0.0'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'awesome_print'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop-rspec'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-screenshot'
   s.add_development_dependency 'chromedriver-helper'
