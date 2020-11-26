@@ -2,24 +2,24 @@
   <%= form_for :spree_instagram_post, :url => update_all_admin_instagram_posts_path(hashtag: hashtag), :html => { :method => :post } do %>
     <div class="row">
       <div class="col-sm-12 text-right">
-        <%= button_link_to Spree.t(:remove_all), destroy_all_admin_instagram_posts_path(hashtag: hashtag), class: "btn-danger", icon: 'remove' %>
-        <%= button_link_to Spree.t(:load_posts_from_api), download_admin_instagram_posts_path(hashtag: hashtag), class: "btn-primary", icon: 'download' %>
+        <%= button_link_to Spree.t(:download_instagram_posts), download_admin_instagram_posts_path(hashtag: hashtag), class: "btn-primary", icon: 'download' %>
         <%= button Spree.t(:update_posts), 'save' %>
+        <%= button_link_to Spree.t(:remove_all), destroy_all_admin_instagram_posts_path(hashtag: hashtag), class: "btn-danger", icon: 'remove' %>
       </div>
     </div>
     <table class="table instagram-posts">
       <thead>
         <tr>
-          <th class="instagram-posts-head-centered"><%= Spree.t(:id) %></th>
-          <th class="instagram-posts-head-centered"><%= Spree.t(:preview) %></th>
+          <th class="instagram-posts__head--centered"><%= Spree.t(:id) %></th>
+          <th class="instagram-posts__head--centered"><%= Spree.t(:preview) %></th>
           <th><%= Spree.t(:caption) %></th>
-          <th class="instagram-posts-head-centered"><%= Spree.t(:like_count) %></th>
-          <th class="instagram-posts-head-centered"><%= Spree.t(:product) %></th>
+          <th class="instagram-posts__head--centered"><%= Spree.t(:likes) %></th>
+          <th class="instagram-posts__head--centered"><%= Spree.t(:product) %></th>
           <% if hashtag %>
-            <th class="instagram-posts-head-centered"><%= Spree.t(:user) %></th>
+            <th class="instagram-posts__head--centered"><%= Spree.t(:user) %></th>
           <% end %>
-          <th class="instagram-posts-head-centered"><%= Spree.t(:visible) %></th>
-          <th class="instagram-posts-head-centered"><%= Spree.t(:downloaded_at) %></th>
+          <th class="instagram-posts__head--centered"><%= Spree.t(:visible) %></th>
+          <th class="instagram-posts__head--centered"><%= Spree.t(:downloaded_at) %></th>
         </tr>
       </thead>
       <tbody>
@@ -28,8 +28,8 @@
       <tr>
         <td><%= post.id %></td>
         <td><div class="preview-container"><%= instagram_preview(post) %></div></td>
-        <td><%= instagram_link(post, instagram_data(post)['caption']) %></td>
-        <td class="instagram-posts-column-centered"><%= instagram_data(post)['like_count'] %></td>
+        <td class="instagram-posts__column--break-word"><%= instagram_link(post, instagram_data(post)['caption']) %></td>
+        <td class="instagram-posts__column--centered"><%= instagram_data(post)['like_count'] %></td>
         <td>
           <%= post_fields.select(:product_id, @products.map { |product| [product.name, product.id] }, { include_blank: true }, { class: 'select2' }) %>
         </td>
@@ -41,7 +41,7 @@
             </div>
           </td>
         <% end %>
-        <td class="instagram-posts-column-centered"><%= post_fields.check_box :show %></td>
+        <td class="instagram-posts__column--centered"><%= post_fields.check_box :show %></td>
         <td><%= pretty_time post.created_at %></td>
       </tr>
         <% end %>
@@ -52,7 +52,7 @@
 <% else %>
   <div class="row">
     <div class="col-sm-12 text-center">
-      <%= button_link_to Spree.t(:load_posts_from_api), download_admin_instagram_posts_path(hashtag: hashtag), class: "btn-primary", icon: 'download' %>
+      <%= button_link_to Spree.t(:download_instagram_posts), download_admin_instagram_posts_path(hashtag: hashtag), class: "btn-primary", icon: 'download' %>
     </div>
   </div>
 <% end %>

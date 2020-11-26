@@ -1,4 +1,4 @@
-<% button_text = instagram_settings.hashtag_id.empty? ? Spree.t(:add_hashtag) : Spree.t(:change_hashtag)%>
+<% button_text = instagram_settings.hashtag_id.empty? ? Spree.t(:use_hashtag) : Spree.t(:update_hashtag)%>
 <div class="row">
   <div class="col-sm-12">
     <%= form_for instagram_settings, url: {controller: :instagram_settings, action: :update} do |f| %>

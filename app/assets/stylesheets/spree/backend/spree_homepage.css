@@ -2,6 +2,8 @@
   display: none;
 }
 
+/* Use BEM rules if possible. */
+
 .instagram-posts .select2-container {
   min-width: 100px;
 }
@@ -9,7 +11,7 @@
 .instagram-posts .preview-container {
   width: 100px;
   height: 100px;
-  background: #ECECEC;
+  background: #ececec;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +28,7 @@
   white-space: nowrap;
 }
 
-.instagram-posts .instagram-posts-head-centered {
+.instagram-posts__head--centered {
   text-align: center;
 }
 
@@ -34,6 +36,10 @@
   vertical-align: top;
 }
 
-.instagram-posts .instagram-posts-column-centered {
+.instagram-posts__column--centered {
   text-align: center;
+}
+
+.instagram-posts__column--break-word {
+  word-break: break-word;
 }
