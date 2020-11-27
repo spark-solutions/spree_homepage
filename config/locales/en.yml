@@ -1,21 +1,21 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
   spree:
-    home_page_settings: Home Page Settings
-    instagram_posts: Instagram Posts
-    load_posts_from_api: Load From Instagram
-    instagram_connected: Instagram Connected
-    instagram_disconnected: Instagram Disconnected
-    instagram_posts_downloaded: Instagram Posts Downloaded
+    download_instagram_posts: Download Instagram posts
+    instagram_connected: Instagram connected
+    instagram_disconnected: Instagram disconnected
+    instagram_posts_downloaded: Instagram posts downloaded
     section_visible: Visible (Mobile)
-    create_field: Create Field
-    change_hashtag: Change Hashtag
-    add_hashtag: Add Hashtag
-    update_posts: Save Changes
+    create_field: Create field
+    update_hashtag: Update hashtag
+    use_hashtag: Use Hashtag
+    update_posts: Save changes
     hashtag_saved: Hashtag Saved
     no_preview: No Preview
+    please_connect_to_instagram: Please connect your Instagram Business Account to Spree
+    instagram: Instagram
+    sections: Sections
+    likes: Likes
+    remove_all: Remove all
     admin:
       tab:
         fields: Fields
