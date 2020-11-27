@@ -16,3 +16,11 @@ en:
     update_posts: Save Changes
     hashtag_saved: Hashtag Saved
     no_preview: No Preview
+    admin:
+      tab:
+        fields: Fields
+        instagram_posts: Instagram Posts
+        instagram_users: Instagram Users
+        field_types: Field Types
+        sections: Sections
+        section_types: Section Types
