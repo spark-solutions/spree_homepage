@@ -1,36 +1,43 @@
-# SpreeHomepage
+# Spree Homepage Gem
 
-Introduction goes here.
+Instagram and links grid management.
+
+![Instagram admin panel screenshot](README_assets/admin_instagram_hashtag.png)
 
 ## Installation
 
-1. Add this extension to your Gemfile with this line:
-  ```ruby
-  gem 'spree_homepage', github: '[your-github-handle]/spree_homepage'
-  ```
+1. Append this extension to your website's `Gemfile`:
+
+```ruby
+gem 'spree_homepage', github: 'https://github.com/spark-solutions/spree_homepage'
+```
 
 2. Install the gem using Bundler:
-  ```ruby
-  bundle install
-  ```
 
-3. Copy & run migrations
-  ```ruby
-  bundle exec rails g spree_homepage:install
-  ```
+```ruby
+bundle install
+```
 
-5. Open config/credentials.yml.enc by running `EDITOR="nano" bin/rails credentials:edit` (change `EDITOR` if necessary) inside Spree. Insert the following credentials:
+3. Copy and run migrations
+
+```ruby
+bundle exec rails g spree_homepage:install
+```
+
+4. Open `config/credentials.yml.enc` by running `EDITOR="nano" bin/rails credentials:edit` (change the value of `EDITOR` if necessary). Insert the following credentials:
 
 ```
 facebook_app_id: <client_id_here>
 facebook_app_secret: <secret_here>
 ```
 
-Running `bin/rails credentials:edit` will create an encrypted configuration file and place the key inside config/master.key (ignored by Git). In production, the key is provided using the `RAILS_MASTER_KEY` environment variable.
+Running `bin/rails credentials:edit` creates an encrypted configuration file and places the access key inside `config/master.key` (ignored by Git). In production, the access key is provided using the `RAILS_MASTER_KEY` environment variable.
 
-4. Restart your server
+5. [Install ImageMagick](https://imagemagick.org/script/download.php)
 
-  If your server was running, restart it so that it can find the assets properly.
+6. Restart your server
+
+If your server was running, restart it so that it can find the installed spree homepage files.
 
 ## Testing
 
@@ -47,12 +54,3 @@ Simply add this require statement to your spec_helper:
 ```ruby
 require 'spree_homepage/factories'
 ```
-
-
-## Contributing
-
-If you'd like to contribute, please take a look at the
-[instructions](CONTRIBUTING.md) for installing dependencies and crafting a good
-pull request.
-
-Copyright (c) 2019 [name of extension creator], released under the New BSD License
